@@ -4,7 +4,7 @@ const User = require("./../models/User");
 const {validationResult}=require("express-validator")//conj. de errores que sucedan de los checks de la ruta 
 
 exports.createUser = async (req, res) => {
-
+  console.log("createUser")
     //Revision de validaciones
     const errors=validationResult(req)//req.busca la propiedad de los errores
     console.log(errors)
@@ -16,8 +16,10 @@ exports.createUser = async (req, res) => {
 
 
   //datos del formulario
-  const { username, email, password } = req.body;
-
+  const { username, email, password,type } = req.body;
+  //get a base de datos para validar usuarios repetidos
+  const users = await User.find({email:email});
+  
   //encriptacion
   try {
     const salt = await bcryptjs.genSalt(10);
@@ -25,7 +27,8 @@ exports.createUser = async (req, res) => {
     const newUser = await User.create({
       username,
       email,
-      hashedPassword, // aqui ya lo convirtió
+      hashedPassword,// aqui ya lo convirtió
+      type 
     });
     const payload = {
       user: {
@@ -64,3 +67,43 @@ exports.createUser = async (req, res) => {
     })
   }
 };
+exports.updateUser=async(req,res) => {
+  const{id,username,email,hashedpassword,type}=req.body
+  try{
+    const updateUser=await User.findByIdAndUpdate(
+      id,
+      { 
+        username,
+        email,
+        hashedpassword,
+        type
+      },
+      {new:true}
+    );
+    return res.json({
+      data:updateUser,
+    });
+
+  }catch(error){
+    console.log(error)
+      return res.status(500).json({
+        msgError:"Hubo un errror actualizando al usuario",
+      })
+    }
+  }
+
+exports.deleteUser=async(req,res) => {
+  const{id}=req.body;
+  try{
+    const deletedUser=await User.findByIdAndRemove({_id:id})
+    return res.json({
+      data:deletedUser,
+      msg:"El usuario ha sido eliminado exitósamente."
+    })
+  }catch(error){
+    console.log(error);
+    return res.status(500).json({
+      msgError:"Hubo un error al eliminar al usuario."
+    })
+  }
+}

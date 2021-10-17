@@ -26,5 +26,5 @@ app.use("/api/auth", require("./routes/auth.js"))
 //SERVIDOR
 
 app.listen(process.env.PORT, () => {
-    console.log("Nuestro servidor está activo") 
+    console.log("Nuestro servidor está activo en puerto: ",process.env.PORT) 
 })

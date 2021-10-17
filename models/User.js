@@ -14,6 +14,10 @@ const UsersSchema = mongoose.Schema({
     hashedPassword: {
         type: String,
         required: true
+    },
+    type:{
+        type:String,
+        required:true
     }
 
 })
