@@ -18,6 +18,10 @@ const UsersSchema = mongoose.Schema({
     type:{
         type:String,
         required:true
+    },
+    rol:{
+        type:Number,
+        require:true  // duda
     }
 
 })

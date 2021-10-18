@@ -1,4 +1,26 @@
 const Product = require("./../models/Products");
+
+exports.getProductById =async(req,res)=>{
+  console.log('REQ:',req)
+  const{id}=req.params; 
+  console.log("getProductById",id)
+  try{
+    const productSelected=await Product.findById({_id:id});
+    console.log("ProductSelected",productSelected)
+    return res.json({
+      data:productSelected,
+      msg:"El producto ha sido seleccionado exitósamente"
+    })
+
+  }catch(error){
+    console.log("Error: ",error)
+    return res.status(500).json({
+      data:null,
+      errorMsg:"Hubo un error interno.Estamos arregládolo lo más pronto posible."
+    })
+
+  }
+}
 exports.getAllProducts = async (req, res) => {
   //res.send("Hola mundo")
   try {

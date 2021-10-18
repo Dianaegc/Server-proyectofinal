@@ -16,6 +16,7 @@ const { validationResult } = require("express-validator")
 exports.loginUser = async (req, res) => {
   // VALIDACIÓN DE FORMULARIO
   const errors = validationResult(req);
+  console.log("entrando")
 
   if (!errors.isEmpty()) {
     return res.status(400).json({
