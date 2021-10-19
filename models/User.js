@@ -15,14 +15,15 @@ const UsersSchema = mongoose.Schema({
         type: String,
         required: true
     },
+       //rol:{
+      //  type:Number,
+       // require:true // 1 admin y 0 customer  
+  //  }
     type:{
         type:String,
         required:true
     },
-    rol:{
-        type:Number,
-        require:true  // duda
-    }
+ 
 
 })
 

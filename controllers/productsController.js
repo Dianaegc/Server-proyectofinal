@@ -1,7 +1,6 @@
 const Product = require("./../models/Products");
 
 exports.getProductById =async(req,res)=>{
-  console.log('REQ:',req)
   const{id}=req.params; 
   console.log("getProductById",id)
   try{
