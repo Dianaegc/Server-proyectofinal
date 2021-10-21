@@ -40,7 +40,7 @@ exports.getAllProducts = async (req, res) => {
 exports.createProduct = async (req, res) => {
   //obetner los datos del formulario
 
-  const { name, pictureUrl, price, description } = req.body;
+  const { name, pictureUrl, price, description,details } = req.body;
 
   try {
     const newProduct = await Product.create({
@@ -48,6 +48,7 @@ exports.createProduct = async (req, res) => {
       pictureUrl,
       price,
       description,
+      details
     });
     return res.json({
       data: newProduct,
@@ -61,7 +62,7 @@ exports.createProduct = async (req, res) => {
   }
 };
 exports.updateProduct = async (req, res) => {
-  const { id, name, pictureUrl, price, description, available } = req.body;
+  const { id, name, pictureUrl, price, description, available,details } = req.body;
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       id,
@@ -71,6 +72,7 @@ exports.updateProduct = async (req, res) => {
         price,
         description,
         available,
+        details
       },
       { new: true }
     ); //me va a mandar el producto actualizado en el json
