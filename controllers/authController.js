@@ -39,7 +39,7 @@ exports.loginUser = async (req, res) => {
       });
     }
 
-    // SI TODO MARAVILLOSO, CANTAMOS JUNTOS Y AVANZAMOS
+    
 
     console.log("Usuario encontrado:", foundUser);
 
